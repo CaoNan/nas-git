@@ -3,10 +3,7 @@ nas-git
 
 Simple &amp; easy to use git GUI
 
-Nan Cao
-Andries Verlinden
-Sander Weyens
-|
-G
-I
-T
+<b>N</b>an Cao <br />
+<b>A</b>ndries Verlinden<br />
+<b>S</b>ander Weyens<br />
+<b>-GIT</b>
