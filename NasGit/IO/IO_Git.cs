@@ -50,19 +50,15 @@ namespace NasGit.IO {
         /// <summary>
         /// This private constructor will make sure this class is a sigleton class.
         /// </summary>
-        private IO_Git() { 
-            start = new ProcessStartInfo("git.exe");
+        private IO_Git() {
+            try {
+                start = new ProcessStartInfo(IO_Config.GIT_EXE_PATH);
+            }catch(Exception exc){
+                Console.WriteLine(exc.Message);
+                //todo: throw exception to upper layer.
+            }
             output = new List<string>();
-        }
-        /// <summary>
-        /// This static methode will create a new repository, which is a copy of remote resource. 
-        /// </summary>
-        /// <param name="address">The address of the remote resource.</param>
-        /// <param name="dir">The folder witch the repository will be created in.</param>
-        /// <returns>The StreamReader instace contains the output.</returns>
-        public void CloneFromRemote(string address,string dir="") {
-            //set the command for cloning from remote
-            start.Arguments = "clone "+address+" "+dir; 
+
             //hide the cmd window
             start.CreateNoWindow = true;
             //redirect the output
@@ -71,11 +67,35 @@ namespace NasGit.IO {
             start.RedirectStandardInput = true;
             //in order to redirect, this has to be set false.
             start.UseShellExecute = false;
-            //start the process
-            Process process = new Process();//Process.Start(start);
+        }
+        /// <summary>
+        /// This static methode will create a new repository, which is a copy of remote resource. 
+        /// </summary>
+        /// <param name="address">The address of the remote resource.</param>
+        /// <param name="dir">The folder witch the repository will be created in.</param>
+        /// <returns>The StreamReader instace contains the output.</returns>
+        public void CloneFromRemote(string address,string dir="") {
+            //set the arguments
+            start.Arguments = "clone "+address+" "+dir; 
+            //creat the process
+            Process process = new Process();
+            process.StartInfo = start;
             //every time the process send some output, the handler will be trigged.
             process.OutputDataReceived += new DataReceivedEventHandler(ReceiveOutput);
-            //process.o
+            //start process
+            process.Start();
+        }
+
+        /// <summary>
+        /// Run any git command
+        /// </summary>
+        /// <param name="argument">The argument is the complete git command, expect "git". For example: "add file.txt"</param>
+        public void RunGitCommand(string argument) {
+            start.Arguments = argument;
+            Process process = new Process();
+            process.OutputDataReceived += new DataReceivedEventHandler(ReceiveOutput);
+            process.StartInfo = start;
+            process.Start();
         }
 
         /// <summary>

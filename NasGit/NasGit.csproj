@@ -50,6 +50,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO\IO_Config.cs" />
     <Compile Include="IO\IO_Git.cs" />
     <Compile Include="IO\Test.cs" />
     <Compile Include="Program.cs" />
