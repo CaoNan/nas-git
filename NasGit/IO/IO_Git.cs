@@ -54,7 +54,7 @@ namespace NasGit.IO {
             try {
                 start = new ProcessStartInfo(IO_Config.GIT_EXE_PATH);
             }catch(Exception exc){
-                Console.WriteLine(exc.Message);
+                Debug.WriteLine(exc.Message);
                 //todo: throw exception to upper layer.
             }
             output = new List<string>();
@@ -91,11 +91,16 @@ namespace NasGit.IO {
         /// </summary>
         /// <param name="argument">The argument is the complete git command, expect "git". For example: "add file.txt"</param>
         public void RunGitCommand(string argument) {
+            Debug.WriteLine("Git Excute: git "+argument);
             start.Arguments = argument;
             Process process = new Process();
             process.OutputDataReceived += new DataReceivedEventHandler(ReceiveOutput);
             process.StartInfo = start;
             process.Start();
+            process.BeginOutputReadLine();
+
+            process.WaitForExit();
+            process.Close();
         }
 
         /// <summary>

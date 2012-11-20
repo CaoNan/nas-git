@@ -71,6 +71,7 @@
     <Compile Include="IO\IO_Config.cs" />
     <Compile Include="IO\IO_Git.cs" />
     <Compile Include="IO\Test.cs" />
+    <Compile Include="Logic\GitEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -96,7 +97,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Logic\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
