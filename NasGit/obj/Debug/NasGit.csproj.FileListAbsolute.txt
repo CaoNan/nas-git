@@ -21,3 +21,4 @@ C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.csprojResolveAs
 C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.Form1.resources
 C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.Properties.Resources.resources
 C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.csproj.GenerateResource.Cache
+C:\Users\Nan\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.Form1.resources
