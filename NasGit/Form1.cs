@@ -118,7 +118,38 @@ namespace NasGit {
         /// <param name="e"></param>
         private void tsbAddRepository_Click(object sender, EventArgs e)
         {
-            if (fbdAddRepository.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+            //resize window
+            Form1.ActiveForm.Height += 65;
+            pnlAddRepo.Visible = true;
+
+            askForLocalDirectory();
+        }
+
+        /// <summary>
+        /// Clone a repository, localy or remote
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbCloneRepository_Click(object sender, EventArgs e)
+        {
+            //resize window
+            Form1.ActiveForm.Height += 65;
+            txtRepoPath.Enabled = true;
+            btnAddRepository.Text = "Clone repository";
+            pnlAddRepo.Visible = true;
+            lblLocalPath.Visible = true;
+            txtLocalPath.Visible = true;
+
+            askForLocalDirectory();
+
+        }
+
+        /// <summary>
+        /// Show folder browse dialog to select local repository path
+        /// </summary>
+        private void askForLocalDirectory() {
+            if (fbdAddRepository.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
                 bool continueCreation = false;
 
                 //Check if we can create a new repo in this directory
@@ -130,53 +161,33 @@ namespace NasGit {
                         continueCreation = true;
                     }
                 }
-                else {
+                else
+                {
                     continueCreation = true;
                 }
 
-                if (continueCreation) {
-                    if (Repository.Discover(fbdAddRepository.SelectedPath) != null)
+                if (continueCreation)
+                {
+                    if (txtRepoPath.Enabled)
                     {
-                        //repository available here, import it
-                        //config.add repository
-                        string existingRepo = Repository.Discover(fbdAddRepository.SelectedPath);
-                        
+                        txtLocalPath.Text = fbdAddRepository.SelectedPath;
                     }
                     else { 
-                        //create new repository
-                        try
-                        {
-                            currentRepo = Repository.Init(fbdAddRepository.SelectedPath);
-                            MessageBox.Show("Repository aangemaakt");
-                        }
-                        catch (RepositoryNotFoundException rne)
-                        {
-                            MessageBox.Show(rne.Message);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                        
+                        txtRepoPath.Text = fbdAddRepository.SelectedPath;
                     }
                     
                 }
+                else
+                {
+                    hideAddRepoPanel();
+                }
+            }
+            else
+            {
+                hideAddRepoPanel();
             }
         }
 
-        /// <summary>
-        /// Clone a repository, localy or remote
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tsbCloneRepository_Click(object sender, EventArgs e)
-        {
-            
-            //Repository.Clone();
-        }
-        //
-        ///
-        ///
         /// <summary>
         /// Show the changes made in this commit
         /// </summary>
@@ -234,6 +245,74 @@ namespace NasGit {
         private void tcRepositories_TabIndexChanged(object sender, System.EventArgs e)
         {
             //load repo config.reposiroties[identifier]
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddRepository_Click(object sender, EventArgs e)
+        {
+            //check if we are adding or cloning a repo
+            if (txtRepoPath.Enabled)
+            {
+                Repository.Clone(txtRepoPath.Text, txtLocalPath.Text);
+            }else{
+                if (Repository.Discover(fbdAddRepository.SelectedPath) != null)
+                {
+                    //repository available here, import it
+                    //config.add repository
+                    string repoC = Repository.Discover(fbdAddRepository.SelectedPath);
+                }
+                else
+                {
+                    //create new repository
+                    try
+                    {
+                        //config.add repository
+                        currentRepo = Repository.Init(txtRepoPath.Text);
+                        MessageBox.Show("Repository aangemaakt");
+                    }
+                    catch (RepositoryNotFoundException rne)
+                    {
+                        MessageBox.Show(rne.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+            }
+            
+            hideAddRepoPanel();
+        }
+
+        /// <summary>
+        /// Cancel button pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancelAddRepo_Click(object sender, EventArgs e)
+        {
+            hideAddRepoPanel();
+        }
+
+        /// <summary>
+        /// Hide add repositorie controls
+        /// </summary>
+        private void hideAddRepoPanel() { 
+            if (txtRepoPath.Enabled) {
+                txtRepoPath.Enabled = false;
+                btnAddRepository.Text = "Add repository";
+                lblLocalPath.Visible = false;
+                txtLocalPath.Visible = false;
+            }
+            txtRepoPath.Text = "";
+            txtRepoName.Text = "";
+            Form1.ActiveForm.Height -= 65;
+            pnlAddRepo.Visible = false;
         }
 
     }
