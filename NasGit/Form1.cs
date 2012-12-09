@@ -8,6 +8,7 @@ using System.Windows.Forms;
 namespace NasGit {
     public partial class Form1 : Form {
         string mRepo = "C:/Users/Sander/Documents/GitHub/nas-git/";
+        string mCurrentCommit = "";
         Repository currentRepo;
 		
         /// <summary>
@@ -17,9 +18,28 @@ namespace NasGit {
             InitializeComponent();
 
             //Load configuration and repositories
-            currentRepo = new Repository(mRepo);
-            //buildCommitLog();
             
+
+            //foreach item in config.repositories
+            addRepositoryToView("1", "Test");
+            
+            
+            
+        }
+
+        private void loadRepository(string path) {
+            currentRepo = new Repository(path);
+
+            buildCommitLog();
+        }
+
+        /// <summary>
+        /// Add new tabpage for repository
+        /// </summary>
+        /// <param name="repoIdentifier">local repo identifier</param>
+        /// <param name="repoName">Name to be dispayed</param>
+        private void addRepositoryToView(string repoIdentifier, string repoName) {
+            tcRepositories.TabPages.Add(repoIdentifier, repoName);
         }
 
 
@@ -79,6 +99,8 @@ namespace NasGit {
         /// Build a log of commits for current repository
         /// </summary>
         private void buildCommitLog(){
+            lvCommits.Clear();
+
             using (currentRepo)
             {
                 foreach (Commit c in currentRepo.Commits)
@@ -116,6 +138,8 @@ namespace NasGit {
                     if (Repository.Discover(fbdAddRepository.SelectedPath) != null)
                     {
                         //repository available here, import it
+                        //config.add repository
+                        string existingRepo = Repository.Discover(fbdAddRepository.SelectedPath);
                         
                     }
                     else { 
@@ -150,7 +174,9 @@ namespace NasGit {
             
             //Repository.Clone();
         }
-
+        //
+        ///
+        ///
         /// <summary>
         /// Show the changes made in this commit
         /// </summary>
@@ -158,6 +184,15 @@ namespace NasGit {
         private void showDiff(string sha) {
             //Working dir diff NOT GOOD
             //TreeChanges tc = currentRepo.Diff.Compare();
+            //Blob a = (Blob) currentRepo.Lookup(sha, GitObjectType.Blob);
+            //Commit c = (Commit)currentRepo.Lookup(mCurrentCommit, GitObjectType.Commit);
+            //TreeEntry t = (TreeEntry)c.Tree.Where(Tree => Tree.Target.Sha == sha).First();
+
+            //Blob b = (Blob)currentRepo.Lookup("24d243a3d1d8ed5894b92a1b0c0ecceb2a71c0a5", GitObjectType.Blob);
+
+            //ContentChanges cc = currentRepo.Diff.Compare(a, b);
+
+            //currentRepo.Diff.Compare(
             //WE NEED THE DIFF OF SELECTED COMMIT
             //TreeEntryChanges tec = tc.Modified.Where(TreeEntryChanges => TreeEntryChanges.Oid.Sha == sha).First();
 
@@ -171,8 +206,9 @@ namespace NasGit {
         /// <param name="e"></param>
         private void lvCommits_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvCommits.SelectedItems.Count > 0) { 
-                changeCommit(lvCommits.SelectedItems[0].Text);
+            if (lvCommits.SelectedItems.Count > 0) {
+                mCurrentCommit = lvCommits.SelectedItems[0].Text;
+                changeCommit(mCurrentCommit);
             }
             
         }
@@ -188,6 +224,16 @@ namespace NasGit {
             {
                 showDiff(lvModifiedFiles.SelectedItems[0].SubItems[1].Text);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tcRepositories_TabIndexChanged(object sender, System.EventArgs e)
+        {
+            //load repo config.reposiroties[identifier]
         }
 
     }
