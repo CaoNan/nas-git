@@ -51,6 +51,7 @@
       <HintPath>Resources\LibGit2Sharp\LibGit2Sharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,9 +69,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO\GitConfigurationSection.cs" />
     <Compile Include="IO\IO_Config.cs" />
     <Compile Include="IO\IO_Git.cs" />
-    <Compile Include="IO\Test.cs" />
+    <Compile Include="IO\RepositoryConfigElement.cs" />
+    <Compile Include="IO\RepositoryConfigCollection.cs" />
     <Compile Include="Logic\GitEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +89,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

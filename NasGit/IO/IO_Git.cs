@@ -52,7 +52,7 @@ namespace NasGit.IO {
         /// </summary>
         private IO_Git() {
             try {
-                start = new ProcessStartInfo(IO_Config.GIT_EXE_PATH);
+                //start = new ProcessStartInfo(IO_Config.GIT_EXE_PATH);
             }catch(Exception exc){
                 Debug.WriteLine(exc.Message);
                 //todo: throw exception to upper layer.
