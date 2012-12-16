@@ -4,12 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace NasGit {
     public partial class Form1 : Form {
         string mRepo = "C:/Users/Sander/Documents/GitHub/nas-git/";
         string mCurrentCommit = "";
         Repository currentRepo;
+        Thread DropWindowThread;
 		
         /// <summary>
         /// Initialise form
@@ -21,11 +23,25 @@ namespace NasGit {
             
 
             //foreach item in config.repositories
-            addRepositoryToView("1", "Test");
-            
+            //addRepositoryToView("1", "Test");
+            DropWindowThread = new Thread(new ThreadStart(ThreadProc));
+            DropWindowThread.Start();
             
             
         }
+
+
+        public static void ThreadProc()
+        {
+            Application.Run(new DropWindow());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadProc));
+            t.Start();
+        }
+
 
         private void loadRepository(string path) {
             currentRepo = new Repository(path);

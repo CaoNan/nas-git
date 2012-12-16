@@ -30,3 +30,5 @@ C:\Users\Nan\Documents\GitHub\nas-git\NasGit\bin\Debug\git2.dll
 C:\Users\Nan\Documents\GitHub\nas-git\NasGit\bin\Debug\NasGit.exe.config
 C:\Users\Nan\Documents\GitHub\nas-git\NasGit\bin\Debug\LibGit2Sharp.dll
 C:\Users\Nan\Documents\GitHub\nas-git\NasGit\bin\Debug\LibGit2Sharp.xml
+C:\Users\Sander\Documents\GitHub\nas-git\NasGit\bin\Debug\NasGit.exe.config
+C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.DropWindow.resources
