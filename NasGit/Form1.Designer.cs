@@ -1,4 +1,5 @@
-﻿namespace NasGit {
+﻿using System.Diagnostics;
+namespace NasGit {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -17,8 +18,8 @@
                 }
                 catch (System.Threading.ThreadAbortException ex)
                 {
-                   //Debug.WriteLine ex.Message;
-                    throw;
+                   Debug.WriteLine( ex.Message);
+                   throw;
                 }
                     
             }

@@ -16,8 +16,8 @@ namespace NasGit
         //ref http://stackoverflow.com/questions/4577141/move-window-without-border
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
-        private const int LARGE_WIDTH = 212;
-        private const int LARGE_HEIGHT = 220;
+        private int LARGE_WIDTH = 212;
+        private int LARGE_HEIGHT = 220;
         TreeNode lastDragDestination = null;
         DateTime lastDragDestinationTime;
 
@@ -31,20 +31,24 @@ namespace NasGit
             InitializeComponent();
 
             //add listeners
-            pbMove.MouseDown += DropWindow_MouseDown;
-            this.MouseDown += DropWindow_MouseDown;
-            pbcApp.MouseHover += DropWindow_MouseHover;
-            pbcApp.DragOver += DropWindow_DragOver;
-            this.DragOver += DropWindow_DragOver;
+            this.MouseDown += new MouseEventHandler(DropWindow_MouseDown);
+            pbcApp.MouseHover += new EventHandler(DropWindow_MouseHover);
+            pbcApp.DragOver += new DragEventHandler(DropWindow_DragOver);
+            pbcApp.MouseDown += new MouseEventHandler(DropWindow_MouseDown);
+            this.pbcApp.DoubleClick += new EventHandler(pbcApp_Click);
+            this.DragOver += new DragEventHandler(DropWindow_DragOver);
             
             //resize when mouse out
-            this.MouseLeave += DropWindow_MouseLeave;
+            this.MouseLeave += new EventHandler(DropWindow_MouseLeave);
+            this.LostFocus += new EventHandler(DropWindow_MouseLeave);
+            pnlDropBox.MouseLeave += new EventHandler(DropWindow_MouseLeave);
+            pnlDragMeHelp.MouseLeave += new EventHandler(DropWindow_MouseLeave);
 
             //Change repo/branch
-            lblRepoName.DragOver += lblRepoName_DragOver;
+            lblRepoName.DragOver += new DragEventHandler(lblRepoName_DragOver);
 
             //Do action
-            this.DragDrop += DropWindow_DragDrop;
+            this.DragDrop += new DragEventHandler(DropWindow_DragDrop);
             setStartSize();
 
         }
@@ -89,6 +93,7 @@ namespace NasGit
         /// <param name="e"></param>
         private void DropWindow_MouseHover(object sender, EventArgs e)
         {
+            this.Focus();
             setLargeSize();
         }
 
@@ -222,9 +227,13 @@ namespace NasGit
             Application.OpenForms[0].Activate();*/
         }
 
-        private void lblRepoName_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-
+            pnlDragMeHelp.Visible = false;
+            this.LARGE_HEIGHT -= 39;
+            pnlDropBox.Location = new Point(pnlDropBox.Location.X, pnlDropBox.Location.Y - 39);
+            this.Height -= 39;
         }
+
     }
 }
