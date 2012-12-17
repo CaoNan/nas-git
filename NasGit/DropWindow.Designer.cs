@@ -31,14 +31,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DropWindow));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("master");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("...");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("repo1", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("master");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("repo2", new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("master");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("...");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("repo1", new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode17});
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("master");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("repo2", new System.Windows.Forms.TreeNode[] {
+            treeNode19});
             this.pbcApp = new System.Windows.Forms.PictureBox();
             this.pbMove = new System.Windows.Forms.PictureBox();
             this.pbCommit = new System.Windows.Forms.PictureBox();
@@ -78,7 +78,7 @@
             // 
             // pbCommit
             // 
-            this.pbCommit.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.pbCommit.Cursor = System.Windows.Forms.Cursors.Default;
             this.pbCommit.Image = ((System.Drawing.Image)(resources.GetObject("pbCommit.Image")));
             this.pbCommit.Location = new System.Drawing.Point(6, 63);
             this.pbCommit.Name = "pbCommit";
@@ -89,7 +89,7 @@
             // 
             // pbBranch
             // 
-            this.pbBranch.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.pbBranch.Cursor = System.Windows.Forms.Cursors.Default;
             this.pbBranch.Image = ((System.Drawing.Image)(resources.GetObject("pbBranch.Image")));
             this.pbBranch.Location = new System.Drawing.Point(6, 111);
             this.pbBranch.Name = "pbBranch";
@@ -144,19 +144,19 @@
             this.trvRepos.HotTracking = true;
             this.trvRepos.Location = new System.Drawing.Point(56, 63);
             this.trvRepos.Name = "trvRepos";
-            treeNode1.Name = "Node5";
-            treeNode1.Text = "master";
-            treeNode2.Name = "Node6";
-            treeNode2.Text = "...";
-            treeNode3.Name = "Node0";
-            treeNode3.Text = "repo1";
-            treeNode4.Name = "Node7";
-            treeNode4.Text = "master";
-            treeNode5.Name = "Node1";
-            treeNode5.Text = "repo2";
+            treeNode16.Name = "Node5";
+            treeNode16.Text = "master";
+            treeNode17.Name = "Node6";
+            treeNode17.Text = "...";
+            treeNode18.Name = "Node0";
+            treeNode18.Text = "repo1";
+            treeNode19.Name = "Node7";
+            treeNode19.Text = "master";
+            treeNode20.Name = "Node1";
+            treeNode20.Text = "repo2";
             this.trvRepos.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode5});
+            treeNode18,
+            treeNode20});
             this.trvRepos.Size = new System.Drawing.Size(152, 90);
             this.trvRepos.TabIndex = 18;
             this.trvRepos.Visible = false;

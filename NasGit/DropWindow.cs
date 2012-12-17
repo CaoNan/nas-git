@@ -33,6 +33,7 @@ namespace NasGit
 
             //add listeners
             pbMove.MouseDown += DropWindow_MouseDown;
+            this.MouseDown += DropWindow_MouseDown;
             pbcApp.MouseHover += DropWindow_MouseHover;
             pbcApp.DragOver += DropWindow_DragOver;
             this.DragOver += DropWindow_DragOver;
@@ -42,6 +43,9 @@ namespace NasGit
 
             //Change repo/branch
             lblRepoName.DragOver += lblRepoName_DragOver;
+
+            //Do action
+            this.DragDrop += DropWindow_DragDrop;
             
 
         }
@@ -91,6 +95,30 @@ namespace NasGit
             }
         }
 
+
+        private void DropWindow_DragDrop(object sender, DragEventArgs e)
+        {
+            //get dropped files
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            
+            //check where files were dropped
+            if (pbCommit.ClientRectangle.Contains(pbCommit.PointToClient(Control.MousePosition)))
+            {
+                //do Commit
+                //is repo and branch set correctly?
+                if (lblBranchName.Text == "...") { 
+                    //show textbox to enter new branch
+                    string branchName = Microsoft.VisualBasic.Interaction.InputBox("Branch name", "Please enter a new branch name", "Default", 0, 0);
+                    lblBranchName.Text = branchName; 
+                }
+            }
+            //Obsolete because we can select a new branch when doing a commit
+            if (pbBranch.ClientRectangle.Contains(pbBranch.PointToClient(Control.MousePosition)))
+            {
+                //doBranch
+            }
+        }
+
         private void lblRepoName_DragOver(object sender, DragEventArgs e)
         {
             trvRepos.Visible = true;
@@ -101,9 +129,6 @@ namespace NasGit
 
         private void trvRepos_DragOver(object sender, DragEventArgs e)
         {
-            Object dragDropObject = null;
-            TreeNode dragDropNode = null;
-
             //always disallow by default
             e.Effect = DragDropEffects.Scroll;
 

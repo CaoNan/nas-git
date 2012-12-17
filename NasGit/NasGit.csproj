@@ -50,6 +50,7 @@
     <Reference Include="LibGit2Sharp">
       <HintPath>Resources\LibGit2Sharp\LibGit2Sharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
