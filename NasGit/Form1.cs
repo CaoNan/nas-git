@@ -61,13 +61,19 @@ namespace NasGit {
         /// <param name="path"></param>
         private void loadRepository(string path) {
             currentRepo = new Repository(path);
+            lvModifiedFiles.Items.Clear();
+            lblBranch.Text = "";
+            lblUser.Text = "";
+            lblChangeset.Text = "";
             buildCommitLog();
 
             //select last commit if working dir has no changes
             //TODO: check working dir changes
             //changeCommit(lvCommits.Items[0].SubItems[0].Text);
             lvCommits.Focus();
-            lvCommits.Items[0].Selected = true;
+            if (lvCommits.Items.Count > 0) { 
+                lvCommits.Items[0].Selected = true;
+            }
         }
 
         /// <summary>
@@ -178,7 +184,6 @@ namespace NasGit {
             txtLocalPath.Visible = true;
 
             askForLocalDirectory();
-
         }
 
         /// <summary>
@@ -292,16 +297,27 @@ namespace NasGit {
         /// <param name="e"></param>
         private void btnAddRepository_Click(object sender, EventArgs e)
         {
+            RepositoryConfigElement newRepo = new RepositoryConfigElement();
+            newRepo.Name = txtRepoName.Text;
             //check if we are adding or cloning a repo
             if (txtRepoPath.Enabled)
             {
+                this.UseWaitCursor = true;
                 Repository.Clone(txtRepoPath.Text, txtLocalPath.Text);
+
+                newRepo.LocalPath = txtLocalPath.Text;
+                newRepo.RemoteURL = txtRepoPath.Text;
+                mLocalRepositories = IO_Config.AddRepositoryConfig(newRepo);
+                addRepositoryToView(newRepo.LocalPath, newRepo.Name);
+
+                this.UseWaitCursor = false;
             }else{
                 if (Repository.Discover(fbdAddRepository.SelectedPath) != null)
                 {
                     //repository available here, import it
-                    //config.add repository
-                    string repoC = Repository.Discover(fbdAddRepository.SelectedPath);
+                    newRepo.LocalPath = txtRepoPath.Text;
+                    mLocalRepositories = IO_Config.AddRepositoryConfig(newRepo);
+                    addRepositoryToView(newRepo.LocalPath, newRepo.Name);
                 }
                 else
                 {
@@ -310,7 +326,9 @@ namespace NasGit {
                     {
                         //config.add repository
                         currentRepo = Repository.Init(txtRepoPath.Text);
-                        MessageBox.Show("Repository aangemaakt");
+                        newRepo.LocalPath = txtRepoPath.Text;
+                        mLocalRepositories = IO_Config.AddRepositoryConfig(newRepo);
+                        addRepositoryToView(newRepo.LocalPath, newRepo.Name);
                     }
                     catch (RepositoryNotFoundException rne)
                     {
@@ -323,7 +341,7 @@ namespace NasGit {
 
                 }
             }
-            
+            tcRepositories.SelectTab(tcRepositories.TabCount - 1);
             hideAddRepoPanel();
         }
 

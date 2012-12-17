@@ -31,3 +31,4 @@ C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.Properties.Reso
 C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.csproj.GenerateResource.Cache
 C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.exe
 C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.pdb
+C:\Users\Sander\Documents\GitHub\nas-git\NasGit\obj\Debug\NasGit.csprojResolveAssemblyReference.cache

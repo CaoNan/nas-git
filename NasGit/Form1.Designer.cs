@@ -68,6 +68,7 @@
             this.txtRepoPath = new System.Windows.Forms.TextBox();
             this.lblRepoPath = new System.Windows.Forms.Label();
             this.txtRepoName = new System.Windows.Forms.TextBox();
+            this.tsbBranching = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fswCheckFilechanges)).BeginInit();
             this.pnlRepositories.SuspendLayout();
@@ -82,6 +83,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAddRepository,
             this.tsbCloneRepository,
+            this.tsbBranching,
             this.tsbSettings});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(16, 0);
@@ -383,6 +385,16 @@
             this.txtRepoName.Size = new System.Drawing.Size(103, 20);
             this.txtRepoName.TabIndex = 15;
             // 
+            // tsbBranching
+            // 
+            this.tsbBranching.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbBranching.Image = ((System.Drawing.Image)(resources.GetObject("tsbBranching.Image")));
+            this.tsbBranching.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBranching.Name = "tsbBranching";
+            this.tsbBranching.Size = new System.Drawing.Size(23, 48);
+            this.tsbBranching.Text = "toolStripButton1";
+            this.tsbBranching.ToolTipText = "Manage branches";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +454,7 @@
         private System.Windows.Forms.Button btnCancelAddRepo;
         private System.Windows.Forms.TextBox txtLocalPath;
         private System.Windows.Forms.Label lblLocalPath;
+        private System.Windows.Forms.ToolStripButton tsbBranching;
     }
 }
 
