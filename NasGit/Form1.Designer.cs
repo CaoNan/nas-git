@@ -171,27 +171,27 @@
             this.lblUser.AutoSize = true;
             this.lblUser.Location = new System.Drawing.Point(391, 213);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(42, 13);
+            this.lblUser.Size = new System.Drawing.Size(10, 13);
             this.lblUser.TabIndex = 19;
-            this.lblUser.Text = "SaWey";
+            this.lblUser.Text = ".";
             // 
             // lblBranch
             // 
             this.lblBranch.AutoSize = true;
             this.lblBranch.Location = new System.Drawing.Point(391, 196);
             this.lblBranch.Name = "lblBranch";
-            this.lblBranch.Size = new System.Drawing.Size(39, 13);
+            this.lblBranch.Size = new System.Drawing.Size(10, 13);
             this.lblBranch.TabIndex = 18;
-            this.lblBranch.Text = "Master";
+            this.lblBranch.Text = ".";
             // 
             // lblChangeset
             // 
             this.lblChangeset.AutoSize = true;
             this.lblChangeset.Location = new System.Drawing.Point(389, 179);
             this.lblChangeset.Name = "lblChangeset";
-            this.lblChangeset.Size = new System.Drawing.Size(320, 13);
+            this.lblChangeset.Size = new System.Drawing.Size(10, 13);
             this.lblChangeset.TabIndex = 17;
-            this.lblChangeset.Text = "13 (08fac2542450) + Updated group registrations (not working yet)";
+            this.lblChangeset.Text = ".";
             // 
             // label3
             // 
@@ -252,6 +252,8 @@
             this.Message,
             this.Author,
             this.Age});
+            this.lvCommits.FullRowSelect = true;
+            this.lvCommits.GridLines = true;
             this.lvCommits.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvCommits.Location = new System.Drawing.Point(3, 35);
             this.lvCommits.MultiSelect = false;
@@ -405,6 +407,8 @@
         }
 
         #endregion
+
+        
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbCloneRepository;

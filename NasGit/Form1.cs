@@ -10,30 +10,36 @@ using NasGit.IO;
 
 namespace NasGit {
     public partial class Form1 : Form {
-        string mRepo = "C:/Users/Sander/Documents/GitHub/nas-git/";
         string mCurrentCommit = "";
         Repository currentRepo;
         Thread DropWindowThread;
-        RepositoryConfigCollection mRepoConfig;
+        RepositoryConfigCollection mLocalRepositories;
 		
         /// <summary>
         /// Initialise form
         /// </summary>
         public Form1() {
             InitializeComponent();
+            //add listerners
+            lvCommits.SelectedIndexChanged += lvCommits_SelectedIndexChanged;
+            tcRepositories.SelectedIndexChanged += tcRepositories_TabIndexChanged;
+
             startDropForm();
             
             
             //Load configuration and repositories
-            mRepoConfig = IO_Config.GetAllRepositoriesConfig();
+            mLocalRepositories = IO_Config.GetAllRepositoriesConfig();
 
             //foreach item in config.repositories
-            if (mRepoConfig.Count > 0) { 
-                foreach (RepositoryConfigElement repo in mRepoConfig)
+            if (mLocalRepositories.Count > 0) { 
+                foreach (RepositoryConfigElement repo in mLocalRepositories)
                 {
                     addRepositoryToView(repo.LocalPath, repo.Name);
                 }
-            }            
+                //load selected repo commits
+                //TODO: Should be last selected repo on previous close if possible
+                loadRepository(mLocalRepositories[0].LocalPath);
+            }   
         }
 
 
@@ -49,11 +55,19 @@ namespace NasGit {
             DropWindowThread.Start();
         }
 
-
+        /// <summary>
+        /// Load a repository and show details on the form
+        /// </summary>
+        /// <param name="path"></param>
         private void loadRepository(string path) {
             currentRepo = new Repository(path);
-
             buildCommitLog();
+
+            //select last commit if working dir has no changes
+            //TODO: check working dir changes
+            //changeCommit(lvCommits.Items[0].SubItems[0].Text);
+            lvCommits.Focus();
+            lvCommits.Items[0].Selected = true;
         }
 
         /// <summary>
@@ -72,7 +86,7 @@ namespace NasGit {
         /// </summary>
         /// <param name="sha">sha hash of requested commit</param>
         private void changeCommit(string sha) {
-            currentRepo = new Repository(mRepo);
+            currentRepo = new Repository(mLocalRepositories[0].LocalPath);
 
             //Commit currentCommit = (Commit)currentRepo.Commits.Where(Commit => Commit.Id.Sha == sha).First();
             Commit currentCommit = (Commit)currentRepo.Lookup(new ObjectId(sha), GitObjectType.Commit);
@@ -122,7 +136,7 @@ namespace NasGit {
         /// Build a log of commits for current repository
         /// </summary>
         private void buildCommitLog(){
-            lvCommits.Clear();
+            lvCommits.Items.Clear();
 
             using (currentRepo)
             {
@@ -268,6 +282,7 @@ namespace NasGit {
         private void tcRepositories_TabIndexChanged(object sender, System.EventArgs e)
         {
             //load repo config.reposiroties[identifier]
+            loadRepository(mLocalRepositories[tcRepositories.SelectedIndex].LocalPath);
         }
 
         /// <summary>
