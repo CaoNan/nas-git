@@ -29,7 +29,6 @@ namespace NasGit
         public DropWindow()
         {
             InitializeComponent();
-            setStartSize();
 
             //add listeners
             pbMove.MouseDown += DropWindow_MouseDown;
@@ -46,15 +45,21 @@ namespace NasGit
 
             //Do action
             this.DragDrop += DropWindow_DragDrop;
-            
+            setStartSize();
 
         }
 
+        /// <summary>
+        /// Minimize drop window
+        /// </summary>
         private void setStartSize() {
-            this.Width = 50;
-            this.Height = 50;
+            this.Width = 21;
+            this.Height = 21;
         }
 
+        /// <summary>
+        /// Maximize drop window
+        /// </summary>
         private void setLargeSize()
         {
             this.Width = LARGE_WIDTH;
@@ -72,14 +77,26 @@ namespace NasGit
             {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+
+                //TODO: save dropwindow location
             }
         }
 
+        /// <summary>
+        /// Make window bigger when hovering over it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DropWindow_MouseHover(object sender, EventArgs e)
         {
             setLargeSize();
         }
 
+        /// <summary>
+        /// Make window bigger when hovering over it with files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DropWindow_DragOver(object sender, System.Windows.Forms.DragEventArgs e)
         {
             setLargeSize();
@@ -87,6 +104,11 @@ namespace NasGit
             e.Effect = DragDropEffects.Move;
         }
 
+        /// <summary>
+        /// Make window smaller when leaving
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DropWindow_MouseLeave(object sender, EventArgs e)
         {
             //check if mouse is still on the form
@@ -95,7 +117,11 @@ namespace NasGit
             }
         }
 
-
+        /// <summary>
+        /// When files are dropped, do something
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DropWindow_DragDrop(object sender, DragEventArgs e)
         {
             //get dropped files
@@ -119,6 +145,11 @@ namespace NasGit
             }
         }
 
+        /// <summary>
+        /// When dragging over the repo name, show the treeview to change repo/branch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblRepoName_DragOver(object sender, DragEventArgs e)
         {
             trvRepos.Visible = true;
@@ -126,7 +157,11 @@ namespace NasGit
             trvRepos.DragOver += trvRepos_DragOver;
         }
 
-
+        /// <summary>
+        /// Select the required repo/branch when hovering over the treeview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trvRepos_DragOver(object sender, DragEventArgs e)
         {
             //always disallow by default
@@ -166,6 +201,11 @@ namespace NasGit
             }
         }
 
+        /// <summary>
+        /// Focus main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pbcApp_Click(object sender, EventArgs e)
         {
             //open main form
