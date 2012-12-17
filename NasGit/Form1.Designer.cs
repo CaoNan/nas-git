@@ -59,20 +59,18 @@
             this.Author = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Age = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tcRepositories = new System.Windows.Forms.TabControl();
-            this.tpRepository = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlAddRepo = new System.Windows.Forms.Panel();
+            this.txtLocalPath = new System.Windows.Forms.TextBox();
+            this.lblLocalPath = new System.Windows.Forms.Label();
+            this.btnCancelAddRepo = new System.Windows.Forms.Button();
+            this.btnAddRepository = new System.Windows.Forms.Button();
             this.txtRepoPath = new System.Windows.Forms.TextBox();
             this.lblRepoPath = new System.Windows.Forms.Label();
             this.txtRepoName = new System.Windows.Forms.TextBox();
-            this.btnAddRepository = new System.Windows.Forms.Button();
-            this.btnCancelAddRepo = new System.Windows.Forms.Button();
-            this.txtLocalPath = new System.Windows.Forms.TextBox();
-            this.lblLocalPath = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fswCheckFilechanges)).BeginInit();
             this.pnlRepositories.SuspendLayout();
-            this.tcRepositories.SuspendLayout();
             this.pnlAddRepo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -287,21 +285,11 @@
             // 
             this.tcRepositories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tcRepositories.Controls.Add(this.tpRepository);
             this.tcRepositories.Location = new System.Drawing.Point(3, 7);
             this.tcRepositories.Name = "tcRepositories";
             this.tcRepositories.SelectedIndex = 0;
             this.tcRepositories.Size = new System.Drawing.Size(766, 22);
             this.tcRepositories.TabIndex = 1;
-            // 
-            // tpRepository
-            // 
-            this.tpRepository.Location = new System.Drawing.Point(4, 22);
-            this.tpRepository.Name = "tpRepository";
-            this.tpRepository.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRepository.Size = new System.Drawing.Size(758, 0);
-            this.tpRepository.TabIndex = 1;
-            this.tpRepository.Text = "Repository";
             // 
             // label4
             // 
@@ -324,11 +312,50 @@
             this.pnlAddRepo.Controls.Add(this.lblRepoPath);
             this.pnlAddRepo.Controls.Add(this.txtRepoName);
             this.pnlAddRepo.Controls.Add(this.label4);
-            this.pnlAddRepo.Location = new System.Drawing.Point(12, 50);
+            this.pnlAddRepo.Location = new System.Drawing.Point(12, 51);
             this.pnlAddRepo.Name = "pnlAddRepo";
             this.pnlAddRepo.Size = new System.Drawing.Size(773, 64);
             this.pnlAddRepo.TabIndex = 15;
             this.pnlAddRepo.Visible = false;
+            // 
+            // txtLocalPath
+            // 
+            this.txtLocalPath.Enabled = false;
+            this.txtLocalPath.Location = new System.Drawing.Point(411, 4);
+            this.txtLocalPath.Name = "txtLocalPath";
+            this.txtLocalPath.Size = new System.Drawing.Size(287, 20);
+            this.txtLocalPath.TabIndex = 21;
+            this.txtLocalPath.Visible = false;
+            // 
+            // lblLocalPath
+            // 
+            this.lblLocalPath.AutoSize = true;
+            this.lblLocalPath.Location = new System.Drawing.Point(345, 7);
+            this.lblLocalPath.Name = "lblLocalPath";
+            this.lblLocalPath.Size = new System.Drawing.Size(60, 13);
+            this.lblLocalPath.TabIndex = 20;
+            this.lblLocalPath.Text = "Local path:";
+            this.lblLocalPath.Visible = false;
+            // 
+            // btnCancelAddRepo
+            // 
+            this.btnCancelAddRepo.Location = new System.Drawing.Point(249, 31);
+            this.btnCancelAddRepo.Name = "btnCancelAddRepo";
+            this.btnCancelAddRepo.Size = new System.Drawing.Size(86, 20);
+            this.btnCancelAddRepo.TabIndex = 19;
+            this.btnCancelAddRepo.Text = "Cancel";
+            this.btnCancelAddRepo.UseVisualStyleBackColor = true;
+            this.btnCancelAddRepo.Click += new System.EventHandler(this.btnCancelAddRepo_Click);
+            // 
+            // btnAddRepository
+            // 
+            this.btnAddRepository.Location = new System.Drawing.Point(157, 31);
+            this.btnAddRepository.Name = "btnAddRepository";
+            this.btnAddRepository.Size = new System.Drawing.Size(86, 20);
+            this.btnAddRepository.TabIndex = 18;
+            this.btnAddRepository.Text = "Add repository";
+            this.btnAddRepository.UseVisualStyleBackColor = true;
+            this.btnAddRepository.Click += new System.EventHandler(this.btnAddRepository_Click);
             // 
             // txtRepoPath
             // 
@@ -354,45 +381,6 @@
             this.txtRepoName.Size = new System.Drawing.Size(103, 20);
             this.txtRepoName.TabIndex = 15;
             // 
-            // btnAddRepository
-            // 
-            this.btnAddRepository.Location = new System.Drawing.Point(157, 31);
-            this.btnAddRepository.Name = "btnAddRepository";
-            this.btnAddRepository.Size = new System.Drawing.Size(86, 20);
-            this.btnAddRepository.TabIndex = 18;
-            this.btnAddRepository.Text = "Add repository";
-            this.btnAddRepository.UseVisualStyleBackColor = true;
-            this.btnAddRepository.Click += new System.EventHandler(this.btnAddRepository_Click);
-            // 
-            // btnCancelAddRepo
-            // 
-            this.btnCancelAddRepo.Location = new System.Drawing.Point(249, 31);
-            this.btnCancelAddRepo.Name = "btnCancelAddRepo";
-            this.btnCancelAddRepo.Size = new System.Drawing.Size(86, 20);
-            this.btnCancelAddRepo.TabIndex = 19;
-            this.btnCancelAddRepo.Text = "Cancel";
-            this.btnCancelAddRepo.UseVisualStyleBackColor = true;
-            this.btnCancelAddRepo.Click += new System.EventHandler(this.btnCancelAddRepo_Click);
-            // 
-            // txtLocalPath
-            // 
-            this.txtLocalPath.Enabled = false;
-            this.txtLocalPath.Location = new System.Drawing.Point(411, 4);
-            this.txtLocalPath.Name = "txtLocalPath";
-            this.txtLocalPath.Size = new System.Drawing.Size(287, 20);
-            this.txtLocalPath.TabIndex = 21;
-            this.txtLocalPath.Visible = false;
-            // 
-            // lblLocalPath
-            // 
-            this.lblLocalPath.AutoSize = true;
-            this.lblLocalPath.Location = new System.Drawing.Point(345, 7);
-            this.lblLocalPath.Name = "lblLocalPath";
-            this.lblLocalPath.Size = new System.Drawing.Size(60, 13);
-            this.lblLocalPath.TabIndex = 20;
-            this.lblLocalPath.Text = "Local path:";
-            this.lblLocalPath.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,7 +398,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.fswCheckFilechanges)).EndInit();
             this.pnlRepositories.ResumeLayout(false);
             this.pnlRepositories.PerformLayout();
-            this.tcRepositories.ResumeLayout(false);
             this.pnlAddRepo.ResumeLayout(false);
             this.pnlAddRepo.PerformLayout();
             this.ResumeLayout(false);
@@ -442,7 +429,6 @@
         private System.Windows.Forms.ColumnHeader Author;
         private System.Windows.Forms.ColumnHeader Age;
         private System.Windows.Forms.TabControl tcRepositories;
-        private System.Windows.Forms.TabPage tpRepository;
         private System.Windows.Forms.Panel pnlAddRepo;
         private System.Windows.Forms.TextBox txtRepoPath;
         private System.Windows.Forms.Label lblRepoPath;

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
+using System.Configuration;
+using NasGit.IO;
 
 namespace NasGit {
     public partial class Form1 : Form {
@@ -12,21 +14,26 @@ namespace NasGit {
         string mCurrentCommit = "";
         Repository currentRepo;
         Thread DropWindowThread;
+        RepositoryConfigCollection mRepoConfig;
 		
         /// <summary>
         /// Initialise form
         /// </summary>
         public Form1() {
             InitializeComponent();
-
-            //Load configuration and repositories
-            
-
-            //foreach item in config.repositories
-            //addRepositoryToView("1", "Test");
             startDropForm();
             
             
+            //Load configuration and repositories
+            mRepoConfig = IO_Config.GetAllRepositoriesConfig();
+
+            //foreach item in config.repositories
+            if (mRepoConfig.Count > 0) { 
+                foreach (RepositoryConfigElement repo in mRepoConfig)
+                {
+                    addRepositoryToView(repo.LocalPath, repo.Name);
+                }
+            }            
         }
 
 
