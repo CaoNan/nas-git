@@ -89,7 +89,7 @@ namespace projecten_dragendrop
          private void pbcApp_Click(object sender, EventArgs e)
          {
              // go to app
-             Console.WriteLine("go to app");
+             Application.OpenForms[0].Activate();
          }
 
     }

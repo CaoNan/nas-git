@@ -24,8 +24,7 @@ namespace NasGit {
 
             //foreach item in config.repositories
             //addRepositoryToView("1", "Test");
-            DropWindowThread = new Thread(new ThreadStart(ThreadProc));
-            DropWindowThread.Start();
+            startDropForm();
             
             
         }
@@ -36,10 +35,11 @@ namespace NasGit {
             Application.Run(new DropWindow());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startDropForm()
         {
-            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadProc));
-            t.Start();
+            DropWindowThread = new Thread(new ThreadStart(ThreadProc));
+            DropWindowThread.SetApartmentState(ApartmentState.STA);
+            DropWindowThread.Start();
         }
 
 
